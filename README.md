@@ -2,6 +2,8 @@
 
 Учебный проект Full Stack (frontend, РК). React + Vite + React Router, данные — mock (`src/data.js`).
 
+https://www.figma.com/design/6vpLu6j5HhK6kQ8iR4HRlw/Untitled?node-id=0-1&t=q2QqlpgcMqk1n7VX-1
+
 ## Запуск
 ```
 npm install
