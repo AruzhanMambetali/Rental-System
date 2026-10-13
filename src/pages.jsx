@@ -78,7 +78,7 @@ export function MyOrders(){const {orders,items,user}=useApp(),[f,setF]=useState(
  const list=orders.filter(o=>o.userId===user.id&&(!f||o.type===f))
  return <div className="wrap sec"><h1>Мои заказы</h1><div className="seg">{[['','Все'],['rent','Аренда'],['sale','Покупка']].map(([k,l])=><button key={k} className={f===k?'on':''} onClick={()=>setF(k)}>{l}</button>)}</div>
  <div className="tw"><table><thead><tr><th>Платье</th><th>Даты</th><th>Тип</th><th>Статус</th><th>Предоплата</th></tr></thead><tbody>{list.map(o=>{const i=items.find(x=>x.id===o.itemId)
-  return <tr key={o.id}><td><Link to={'/catalog/'+i.id}>{i.name}</Link></td><td>{o.type==='rent'?`${o.from} — ${o.to}`:'—'}</td><td>{o.type==='rent'?'Аренда':'Покупка'}</td><td><StatusBadge s={o.status}/></td><td>{o.prepay?<>{money(o.prepay)} <small>{o.paid?'оплачена':'ожидается'}</small></>:'—'}</td></tr>})}</tbody></table>
+  return <tr key={o.id}><td data-l="Платье"><Link to={'/catalog/'+i.id}>{i.name}</Link></td><td data-l="Даты">{o.type==='rent'?`${o.from} — ${o.to}`:'—'}</td><td data-l="Тип">{o.type==='rent'?'Аренда':'Покупка'}</td><td data-l="Статус"><StatusBadge s={o.status}/></td><td data-l="Предоплата">{o.prepay?<>{money(o.prepay)} <small>{o.paid?'оплачена':'ожидается'}</small></>:'—'}</td></tr>})}</tbody></table>
  {!list.length&&<p style={{padding:16}}>Заказов пока нет. <Link to="/catalog">Выбрать платье</Link></p>}</div></div>}
 
 export function Auth({register}){const {items,login,register:reg}=useApp(),nav=useNavigate(),loc=useLocation(),[f,setF]=useState({name:'',email:'',password:''}),[err,setErr]=useState(''),[k,setK]=useState(0)
@@ -105,9 +105,9 @@ function Orders(){const {orders,items,users,setOrderStatus,markPaid}=useApp(),[f
  return <><div className="filters"><input className="search" placeholder="Поиск по платью" value={q} onChange={e=>setQ(e.target.value)}/>
   <select value={f} onChange={e=>setF(e.target.value)}><option value="">Все статусы</option>{['pending','confirmed','cancelled'].map(s=><option key={s} value={s}>{ST[s][0]}</option>)}</select></div>
  <div className="tw"><table><thead><tr><th>Клиент</th><th>Платье</th><th>Даты</th><th>Тип</th><th>Статус</th><th>Предоплата</th><th>Действия</th></tr></thead><tbody>{list.map(o=><tr key={o.id}>
-  <td>{users.find(u=>u.id===o.userId)?.name}<br/><small>{o.phone}</small></td><td>{nm(o)}</td><td>{o.type==='rent'?`${o.from} — ${o.to}`:'—'}</td><td>{o.type==='rent'?'Аренда':'Покупка'}</td><td><StatusBadge s={o.status}/></td>
-  <td>{o.prepay?<>{money(o.prepay)}<br/><small>{o.paid?'оплачена':'ожидается'}</small></>:'—'}</td>
-  <td><div className="acts">{o.status==='pending'&&<><button className="btn sm" onClick={()=>setOrderStatus(o.id,'confirmed')}>Подтвердить</button><button className="btn sm out" onClick={()=>setOrderStatus(o.id,'cancelled')}>Отменить</button></>}
+  <td data-l="Клиент">{users.find(u=>u.id===o.userId)?.name}<br/><small>{o.phone}</small></td><td data-l="Платье">{nm(o)}</td><td data-l="Даты">{o.type==='rent'?`${o.from} — ${o.to}`:'—'}</td><td data-l="Тип">{o.type==='rent'?'Аренда':'Покупка'}</td><td data-l="Статус"><StatusBadge s={o.status}/></td>
+  <td data-l="Предоплата">{o.prepay?<>{money(o.prepay)}<br/><small>{o.paid?'оплачена':'ожидается'}</small></>:'—'}</td>
+  <td data-l="Действия"><div className="acts">{o.status==='pending'&&<><button className="btn sm" onClick={()=>setOrderStatus(o.id,'confirmed')}>Подтвердить</button><button className="btn sm out" onClick={()=>setOrderStatus(o.id,'cancelled')}>Отменить</button></>}
    {!!o.prepay&&!o.paid&&o.status!=='cancelled'&&<button className="btn sm out" onClick={()=>markPaid(o.id)}>Предоплата получена</button>}
    {o.status!=='cancelled'&&<button className="btn sm out" onClick={()=>wa(o,o.status==='pending'?'ask':'ok')}>WhatsApp: {o.status==='pending'?'запрос':'подтверждение'}</button>}
    {o.type==='rent'&&o.status==='confirmed'&&<button className="btn sm out" onClick={()=>wa(o,'back')}>WhatsApp: возврат</button>}</div></td></tr>)}</tbody></table></div></>}
@@ -115,11 +115,11 @@ function Orders(){const {orders,items,users,setOrderStatus,markPaid}=useApp(),[f
 function ItemsTable({onEdit}){const {items,orders,setItemStatus,deleteItem}=useApp()
  const del=i=>{const n=orders.filter(o=>o.itemId===i.id).length;if(window.confirm(`Удалить платье «${i.name}»?`+(n?` Заказы на него (${n}) тоже будут удалены.`:'')))deleteItem(i.id)}
  return <><p className="muted">Статусы: В наличии → Забронировано → В аренде → На чистке → В наличии</p>
- <div className="tw"><table><thead><tr><th>Платье</th><th>Арт.</th><th>Размер</th><th>Фото</th><th>Статус</th><th>Действия</th></tr></thead><tbody>{items.map(i=><tr key={i.id}><td className="thumbrow"><Photo shot={shots(i)[0]} item={i}/>{i.name}</td><td>{i.article}</td><td>{i.size}</td><td>{i.photos?.length||0}</td><td><StatusBadge s={i.status}/></td>
-  <td className="acts">{NEXT[i.status]&&<button className="btn sm" onClick={()=>setItemStatus(i.id,NEXT[i.status])}>→ {ST[NEXT[i.status]][0]}</button>}<button className="btn sm out" onClick={()=>onEdit(i)}>Изменить</button><button className="btn sm out danger" onClick={()=>del(i)}>Удалить</button></td></tr>)}</tbody></table></div></>}
+ <div className="tw"><table><thead><tr><th>Платье</th><th>Арт.</th><th>Размер</th><th>Фото</th><th>Статус</th><th>Действия</th></tr></thead><tbody>{items.map(i=><tr key={i.id}><td data-l="Платье" className="thumbrow"><Photo shot={shots(i)[0]} item={i}/>{i.name}</td><td data-l="Арт.">{i.article}</td><td data-l="Размер">{i.size}</td><td data-l="Фото">{i.photos?.length||0}</td><td data-l="Статус"><StatusBadge s={i.status}/></td>
+  <td data-l="Действия" className="acts">{NEXT[i.status]&&<button className="btn sm" onClick={()=>setItemStatus(i.id,NEXT[i.status])}>→ {ST[NEXT[i.status]][0]}</button>}<button className="btn sm out" onClick={()=>onEdit(i)}>Изменить</button><button className="btn sm out danger" onClick={()=>del(i)}>Удалить</button></td></tr>)}</tbody></table></div></>}
 
 function Clients(){const {users,orders}=useApp()
- return <div className="tw"><table><thead><tr><th>Имя</th><th>Email</th><th>Роль</th><th>Заказов</th></tr></thead><tbody>{users.map(u=><tr key={u.id}><td>{u.name}</td><td>{u.email}</td><td>{{client:'Клиент',manager:'Менеджер',owner:'Владелец'}[u.role]}</td><td>{orders.filter(o=>o.userId===u.id).length}</td></tr>)}</tbody></table></div>}
+ return <div className="tw"><table><thead><tr><th>Имя</th><th>Email</th><th>Роль</th><th>Заказов</th></tr></thead><tbody>{users.map(u=><tr key={u.id}><td data-l="Имя">{u.name}</td><td data-l="Email">{u.email}</td><td data-l="Роль">{{client:'Клиент',manager:'Менеджер',owner:'Владелец'}[u.role]}</td><td data-l="Заказов">{orders.filter(o=>o.userId===u.id).length}</td></tr>)}</tbody></table></div>}
 
 const MON=['Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт'],RENT=[12,18,15,24,30,28,35,42],SALE=[4,6,5,9,8,12,10,15]
 function Analytics(){const {items,orders,resetData}=useApp()
