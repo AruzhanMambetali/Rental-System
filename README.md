@@ -7,8 +7,6 @@
 
 Веб-приложение для салона платьев кыз узату: единый учёт аренды и продажи, проверка дат без двойных броней, статусы платьев от брони до возврата, QR-бирки для быстрой смены статуса.
 
-**Дизайн в Figma:** [макеты](https://www.figma.com/design/6vpLu6j5HhK6kQ8iR4HRlw/Untitled?node-id=0-1&t=q2QqlpgcMqk1n7VX-1)
-
 > Учебный курсовой проект по дисциплине Full Stack (МУИТ / IITU). Текущая версия — frontend с mock-данными, без backend.
 
 ## Содержание
@@ -39,19 +37,19 @@
 
 | Главная | Каталог |
 |---|---|
-| ![Главная](docs/screenshots/home.jpg) | ![Каталог](docs/screenshots/catalog.jpg) |
+| ![Главная](docs/screenshots/home.png) | ![Каталог](docs/screenshots/catalog.png) |
 
 | Страница платья | Оформление заказа |
 |---|---|
-| ![Платье](docs/screenshots/item.jpg) | ![Заказ](docs/screenshots/checkout.jpg) |
+| ![Платье](docs/screenshots/item.png) | ![Заказ](docs/screenshots/checkout.png) |
 
 | Панель менеджера | Панель владельца |
 |---|---|
-| ![Менеджер](docs/screenshots/manager.jpg) | ![Владелец](docs/screenshots/admin.jpg) |
+| ![Менеджер](docs/screenshots/manager.png) | ![Владелец](docs/screenshots/admin.png) |
 
 | Вход | Мобильная версия |
 |---|---|
-| ![Вход](docs/screenshots/login.jpg) | ![Мобильная](docs/screenshots/mobile.jpg) |
+| ![Вход](docs/screenshots/login.png) | ![Мобильная](docs/screenshots/mobile.png) |
 
 ## Возможности
 
@@ -86,8 +84,8 @@
 Требуется [Node.js](https://nodejs.org) версии 18 и выше.
 
 ```bash
-git clone https://github.com/AruzhanMambetali/Rental-System.git
-cd Rental-System
+git clone https://github.com/<username>/kyz-uzatu.git
+cd kyz-uzatu
 npm install
 npm run dev
 ```
@@ -153,7 +151,7 @@ npm run preview   # локальный просмотр сборки
 ## Структура проекта
 
 ```
-Rental-System/
+kyz-uzatu/
 ├── docs/screenshots/    скриншоты для README
 ├── public/
 │   ├── img/             фото платьев (d1.jpg, d1.1.jpg — другие ракурсы)
@@ -201,9 +199,9 @@ Rental-System/
 
 | Участник | Роль |
 |---|---|
-| _Имя Фамилия_ | Frontend |
-| _Имя Фамилия_ | Документация и GitHub |
-| _Имя Фамилия_ | UX/UI и графика |
+| _Мамбеталі Аружан_ | Frontend |
+| _Сагидуллаева Нуршат_ | Документация и GitHub |
+| _Құнапия Нуркамал_ | UX/UI и графика |
 
 ---
 Учебный проект, 2026. Фото платьев принадлежат салону.
