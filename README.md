@@ -37,19 +37,19 @@
 
 | Главная | Каталог |
 |---|---|
-| ![Главная](docs/screenshots/home.png) | ![Каталог](docs/screenshots/catalog.png) |
+| ![Главная](docs/screenshots/home.jpg) | ![Каталог](docs/screenshots/catalog.jpg) |
 
 | Страница платья | Оформление заказа |
 |---|---|
-| ![Платье](docs/screenshots/item.png) | ![Заказ](docs/screenshots/checkout.png) |
+| ![Платье](docs/screenshots/item.jpg) | ![Заказ](docs/screenshots/checkout.jpg) |
 
 | Панель менеджера | Панель владельца |
 |---|---|
-| ![Менеджер](docs/screenshots/manager.png) | ![Владелец](docs/screenshots/admin.png) |
+| ![Менеджер](docs/screenshots/manager.jpg) | ![Владелец](docs/screenshots/admin.jpg) |
 
 | Вход | Мобильная версия |
 |---|---|
-| ![Вход](docs/screenshots/login.png) | ![Мобильная](docs/screenshots/mobile.png) |
+| ![Вход](docs/screenshots/login.jpg) | ![Мобильная](docs/screenshots/mobile.jpg) |
 
 ## Возможности
 
